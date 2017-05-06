@@ -228,7 +228,8 @@ using extras_t = json;
 ///
 struct glTFProperty_t {
     /// No description in schema.
-    extension_t extensions = {};
+    //extension_t extensions = {};
+    extension_t extensions{};
     /// No description in schema.
     extras_t extras = {};
 };
@@ -669,7 +670,8 @@ struct mesh_primitive_t : glTFProperty_t {
     /// A dictionary object, where each key corresponds to mesh attribute
     /// semantic and each value is the index of the accessor containing
     /// attribute's data. [required]
-    std::map<std::string, int> attributes = {};
+    //std::map<std::string, int> attributes = {};
+    std::map<std::string, int> attributes{};
     /// The index of the accessor that contains the indices.
     int indices = -1;
     /// The index of the material to apply to this primitive when rendering.
