@@ -128,11 +128,14 @@ namespace ygltf {}
 #define _YGLTF_H_
 
 // compilation options
-#ifdef YGLTF_INLINE
-#define YGLTF_API inline
-#else
-#define YGLTF_API
-#endif
+//#ifdef YGLTF_INLINE
+//#define YGLTF_API inline
+//#else
+//#define YGLTF_API
+//#endif
+
+#include "YGLTF_API_EXPORT.h" 
+
 
 #include <array>
 #include <map>
