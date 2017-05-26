@@ -26,8 +26,12 @@
 // IMPLEMENTATION OF YOCTO_SHAPE
 // -----------------------------------------------------------------------------
 
-#include "yocto_shape.h"
-#include "yocto_math.h"
+//#include "yocto_shape.h"
+//#include "yocto_math.h"
+
+#include "YSHAPE.h"
+#include "YMATH.h"
+
 
 #include <functional>
 #include <unordered_map>
@@ -401,7 +405,7 @@ YSHAPE_API void make_lines(int usteps, int num, std::vector<int2>& lines,
     lines.resize(usteps * num);
     for (int j = 0; j < num; j++) {
         for (int i = 0; i < usteps; i++) {
-            lines[j * usteps + i] = {vid(i, j), vid(i + 1, j)};
+            lines[j * usteps + i] = {{vid(i, j), vid(i + 1, j)}};
         }
     }
 }
@@ -701,7 +705,8 @@ static inline void _make_stdsurface(stdsurface_type stype, int level,
                 ym::frame3f{{-1, 0, 0}, {0, 0, 1}, {0, 1, 0}, {0, 1, 0}},
                 ym::frame3f{{1, 0, 0}, {0, 0, 1}, {0, -1, 0}, {0, -1, 0}},
                 ym::frame3f{{0, 1, 0}, {0, 0, 1}, {1, 0, 0}, {1, 0, 0}},
-                ym::frame3f{{0, -1, 0}, {0, 0, 1}, {-1, 0, 0}, {-1, 0, 0}}};
+                ym::frame3f{{0, -1, 0}, {0, 0, 1}, {-1, 0, 0}, {-1, 0, 0}}
+                 };
             for (auto& f : frames) f = frame * f;
             std::vector<ym::vec3f> quad_pos, quad_norm;
             std::vector<ym::vec2f> quad_texcoord;

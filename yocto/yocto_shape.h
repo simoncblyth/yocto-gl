@@ -88,11 +88,15 @@ namespace yshape {}
 #define _YSHAPE_H_
 
 // compilation options
-#ifdef YSHAPE_INLINE
-#define YSHAPE_API inline
-#else
-#define YSHAPE_API
-#endif
+//#ifdef YSHAPE_INLINE
+//#define YSHAPE_API inline
+//#else
+//#define YSHAPE_API
+//#endif
+
+
+#include "YSHAPE_API_EXPORT.h" 
+
 
 #include <array>
 #include <functional>

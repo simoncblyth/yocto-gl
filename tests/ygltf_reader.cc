@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include "yocto_gltf.h"
+#include "YGLTF.h"
 
 
 /*
@@ -22,8 +22,7 @@ static inline std::array<float, 16> _float4x4_mul(
     return c;
 }
 
-const std::array<float, 16> _identity_float4x4 = {
-    1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+const std::array<float, 16> _identity_float4x4 = {{ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}};
 
 
 

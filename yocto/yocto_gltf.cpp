@@ -60,7 +60,8 @@
 // TODO: unflatten: error for pos.size()
 //
 
-#include "yocto_gltf.h"
+//#include "yocto_gltf.h"
+#include "YGLTF.h"
 
 #include <cstdio>
 #include <fstream>
@@ -3134,6 +3135,14 @@ YGLTF_API fl_gltf* flatten_gltf(const glTF_t* gltf, int scene_idx) {
         for (auto node_id : scn->nodes) {
             stack.push_back(std::make_tuple(node_id, _identity_float4x4));
         }
+
+       /*
+        std::cout << "flatten_gltf"
+                  << " scn_id " << scn_id
+                  << " stack.size " << stack.size() 
+                  << std::endl ; 
+       */
+
         while (!stack.empty()) {
             int node_id;
             std::array<float, 16> xf;
@@ -3164,8 +3173,9 @@ YGLTF_API fl_gltf* flatten_gltf(const glTF_t* gltf, int scene_idx) {
                 fl_scn->meshes.push_back((int)fl_gltf->meshes.size() - 1);
             }
             for (auto child : node->children) { stack.push_back({child, xf}); }
-            fl_gltf->scenes.push_back(fl_scn);
+            //fl_gltf->scenes.push_back(fl_scn);
         }
+        fl_gltf->scenes.push_back(fl_scn);  // SCB moved, makes more sense here
     }
 
     return fl_gltf.release();

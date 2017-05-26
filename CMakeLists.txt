@@ -36,6 +36,7 @@ add_definitions(
 set(SOURCES
      yocto/yocto_img.cpp
      yocto/yocto_gltf.cpp
+     yocto/yocto_shape.cpp
 )
 
 
@@ -44,8 +45,11 @@ set(EXT_HEADERS
 )
 
 set(HEADERS
+     yocto/yocto_math.h
+     yocto/yocto_shape.h
      yocto/yocto_gltf.h
      yocto/YGLTF_API_EXPORT.h 
+     yocto/YSHAPE_API_EXPORT.h 
 )
 
 
