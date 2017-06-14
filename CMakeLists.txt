@@ -54,8 +54,8 @@ set(HEADERS
 
 
 add_library(${name} SHARED ${SOURCES}  )
-install(TARGETS ${name}  DESTINATION lib)
-install(FILES ${HEADERS} DESTINATION include/${name})
-install(FILES ${EXT_HEADERS} DESTINATION include/${name}/ext)
+install(TARGETS ${name}  DESTINATION externals/lib)
+install(FILES ${HEADERS} DESTINATION externals/include/${name})
+install(FILES ${EXT_HEADERS} DESTINATION externals/include/${name}/ext)
 
 add_subdirectory(tests)
