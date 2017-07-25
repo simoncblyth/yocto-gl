@@ -36,7 +36,7 @@ add_definitions(
 set(SOURCES
      yocto/yocto_img.cpp
      yocto/yocto_gltf.cpp
-     yocto/yocto_shape.cpp
+#     yocto/yocto_shape.cpp
 )
 
 

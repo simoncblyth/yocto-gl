@@ -103,9 +103,10 @@ namespace ym {}
 #include <initializer_list>
 #include <limits>
 #include <vector>
+#include <type_traits>
 
 // HACK to avoid compilation with MSVC2015 without dirtying code
-#ifdef _WIN32
+#if defined(_WIN32) || __cplusplus < 201402L
 #define constexpr
 #endif
 

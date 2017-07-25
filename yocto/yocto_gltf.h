@@ -616,7 +616,7 @@ struct material_occlusionTextureInfo_t : textureInfoBase_t {
 ///
 struct material_pbrMetallicRoughness_t {
     /// The material's base color factor.
-    std::array<float, 4> baseColorFactor = {1, 1, 1, 1};
+    std::array<float, 4> baseColorFactor = { {1, 1, 1, 1} };
     /// The base color texture.
     textureInfo_t baseColorTexture = {};
     /// The metalness of the material.
@@ -643,7 +643,7 @@ struct arrayValues_t {
 ///
 struct material_t : glTFChildOfRootProperty_t {
     /// The emissive color of the material.
-    std::array<float, 3> emissiveFactor = {0, 0, 0};
+    std::array<float, 3> emissiveFactor = {{0, 0, 0}};
     /// The emissive map texture.
     textureInfo_t emissiveTexture = {};
     /// The normal map texture.
@@ -718,18 +718,18 @@ struct node_t : glTFChildOfRootProperty_t {
     std::vector<int> children = {};
     /// A floating-point 4x4 transformation matrix stored in column-major order.
     std::array<float, 16> matrix = {
-        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}};
     /// The index of the mesh in this node.
     int mesh = -1;
     /// The node's unit quaternion rotation in the order (x, y, z, w), where w
     /// is the scalar.
-    std::array<float, 4> rotation = {0, 0, 0, 1};
+    std::array<float, 4> rotation = {{0, 0, 0, 1}};
     /// The node's non-uniform scale.
-    std::array<float, 3> scale = {1, 1, 1};
+    std::array<float, 3> scale = {{1, 1, 1}};
     /// The index of the skin referenced by this node.
     int skin = -1;
     /// The node's translation.
-    std::array<float, 3> translation = {0, 0, 0};
+    std::array<float, 3> translation = {{0, 0, 0}};
     /// The weights of the instantiated Morph Target. Number of elements must
     /// match number of Morph Targets of used mesh.
     std::vector<float> weights = {};
@@ -1061,7 +1061,7 @@ YGLTF_API std::array<float, 16> node_transform(const node_t* node);
 struct fl_camera {
     std::string name = "";  // name
     std::array<float, 16> xform = {
-        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};  // transform
+        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}};  // transform
     bool ortho = false;                                   // orthographic
     float aspect = 1;                                     // aspect ratio
     float yfov =
@@ -1116,11 +1116,11 @@ struct fl_material {
     /// name
     std::string name = "";
     /// emission color
-    std::array<float, 3> ke = {0, 0, 0};
+    std::array<float, 3> ke = {{0, 0, 0}};
     /// diffuse color
-    std::array<float, 3> kd = {0, 0, 0};
+    std::array<float, 3> kd = {{0, 0, 0}};
     /// specular color
-    std::array<float, 3> ks = {0, 0, 0};
+    std::array<float, 3> ks = {{0, 0, 0}};
     /// specular roughness
     float rs = 0;
     /// opacity
@@ -1163,7 +1163,7 @@ struct fl_mesh {
     std::string name = "";
     /// transform
     std::array<float, 16> xform = {
-        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}};
     /// primitives
     std::vector<int> primitives;
 };

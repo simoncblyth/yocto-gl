@@ -110,7 +110,7 @@ void test_walk(const ygltf::glTF_t* gltf, int scene_idx=-1)
             }
 
 
-            for (auto child : node->children) { stack.push_back({child, xf}); }
+            for (auto child : node->children) { stack.push_back(std::make_tuple(child, xf)); }
         }
     }
 
