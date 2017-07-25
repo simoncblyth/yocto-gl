@@ -3166,13 +3166,20 @@ YGLTF_API fl_gltf* flatten_gltf(const glTF_t* gltf, int scene_idx) {
                 fm->primitives = meshes.at(mesh_name);
                 fl_gltf->meshes.push_back(fm);
 #else
-                fl_gltf->meshes.push_back(
-                    new fl_mesh{gltf->meshes.at(node->mesh).name, xf,
-                        meshes.at(node->mesh)});
+                // fl_gltf->meshes.push_back(
+		// 			  new fl_mesh{gltf->meshes.at(node->mesh).name, xf,
+		// 				meshes.at(node->mesh)});
+
+                auto fm = new fl_mesh();
+                fm->name = gltf->meshes.at(node->mesh).name;
+                fm->xform = xf;
+                fm->primitives = meshes.at(node->mesh);
+                fl_gltf->meshes.push_back(fm);
+
 #endif
                 fl_scn->meshes.push_back((int)fl_gltf->meshes.size() - 1);
             }
-            for (auto child : node->children) { stack.push_back({child, xf}); }
+            for (auto child : node->children) { stack.push_back(std::make_tuple(child, xf)); }
             //fl_gltf->scenes.push_back(fl_scn);
         }
         fl_gltf->scenes.push_back(fl_scn);  // SCB moved, makes more sense here
