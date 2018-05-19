@@ -1,37 +1,17 @@
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 3.5)
 set(name YoctoGL)
-project(${name})
+project(${name} VERSION 0.1.0)
 
 include(CTest)
-
-
 include(EnvCompilationFlags)
 
-#set(CMAKE_CXX_STANDARD 14)
-#set(CMAKE_CXX_STANDARD_REQUIRED on)
+include(GNUInstallDirs)
+set(CMAKE_INSTALL_INCLUDEDIR "externals/include/${name}")
+set(CMAKE_INSTALL_LIBDIR     "externals/lib")
+set(CMAKE_INSTALL_BINDIR     "lib")
 
-
-# https://cmake.org/Wiki/CMake_RPATH_handling
-if (APPLE)
-   set(CMAKE_SKIP_BUILD_RPATH  FALSE)
-   set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
-   set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-   set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")  
-   set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
-   # http://www.kitware.com/blog/home/post/510
-   # enable @rpath in the install name for any shared library being built
-   # note: it is planned that a future version of CMake will enable this by default
-   set(CMAKE_MACOSX_RPATH 1)
-endif(APPLE)
-
-
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/yocto
-)
-
-add_definitions( 
-)
-
+find_package(BCM REQUIRED)
+include(BCMDeploy)
 
 set(SOURCES
      yocto/yocto_img.cpp
@@ -39,8 +19,7 @@ set(SOURCES
 #     yocto/yocto_shape.cpp
 )
 
-
-set(EXT_HEADERS
+set(HEADERS_EXT
      yocto/ext/json.hpp
 )
 
@@ -48,14 +27,29 @@ set(HEADERS
      yocto/yocto_math.h
      yocto/yocto_shape.h
      yocto/yocto_gltf.h
+     yocto/YGLTF.h 
      yocto/YGLTF_API_EXPORT.h 
      yocto/YSHAPE_API_EXPORT.h 
 )
 
+add_library(${name} SHARED ${SOURCES})
 
-add_library(${name} SHARED ${SOURCES}  )
-install(TARGETS ${name}  DESTINATION externals/lib)
-install(FILES ${HEADERS} DESTINATION externals/include/${name})
-install(FILES ${EXT_HEADERS} DESTINATION externals/include/${name}/ext)
+target_include_directories(${name} PUBLIC
+   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/yocto>
+)
+
+target_compile_features(${name} 
+   PUBLIC 
+      cxx_constexpr
+)
+
+
+
+install(TARGETS ${name}  DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES ${HEADERS_EXT} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ext)
+
+bcm_deploy(TARGETS ${name} NAMESPACE Opticks:: SKIP_HEADER_INSTALL)
 
 add_subdirectory(tests)
+

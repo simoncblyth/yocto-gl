@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 set(name YoctoGLTests)
-project(${name})
+project(${name} VERSION 0.1.0)
+#set(CMAKE_INSTALL_RPATH  ${CMAKE_INSTALL_FULL_LIBDIR})
+#message(STATUS "CMAKE_INSTALL_FULL_LIBDIR : ${CMAKE_INSTALL_FULL_LIBDIR} ")
+
 
 set(TEST_SOURCES
    ygltf_reader.cc
@@ -30,8 +33,8 @@ foreach(TEST_SOURCE ${TEST_SOURCES})
     endif(WIN32)
 
     #add_dependencies(check ${TGT})
-    target_link_libraries(${TGT} ${LIBRARIES} YoctoGL)
-    install(TARGETS ${TGT} DESTINATION lib)
+    target_link_libraries(${TGT} YoctoGL)
+    install(TARGETS ${TGT} DESTINATION ${CMAKE_INSTALL_BINDIR})
 endforeach()
 
 
