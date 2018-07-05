@@ -3,7 +3,7 @@ set(name YoctoGL)
 project(${name} VERSION 0.1.0)
 
 include(CTest)
-include(EnvCompilationFlags)
+include(OpticksBuildOptions)
 
 include(GNUInstallDirs)
 set(CMAKE_INSTALL_INCLUDEDIR "externals/include/${name}")
