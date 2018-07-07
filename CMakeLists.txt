@@ -3,15 +3,22 @@ set(name YoctoGL)
 project(${name} VERSION 0.1.0)
 
 include(CTest)
-include(EnvCompilationFlags)
+include(OpticksBuildOptions)
+#[=[
+YoctoGL
+========
+
+Opticks currently uses only glTF 2.0 reading/writing from YoctoGL.
+
+* OpticksBuildOpticks finds BCM
+
+#]=]
 
 include(GNUInstallDirs)
 set(CMAKE_INSTALL_INCLUDEDIR "externals/include/${name}")
 set(CMAKE_INSTALL_LIBDIR     "externals/lib")
 set(CMAKE_INSTALL_BINDIR     "lib")
 
-find_package(BCM REQUIRED)
-include(BCMDeploy)
 
 set(SOURCES
      yocto/yocto_img.cpp
