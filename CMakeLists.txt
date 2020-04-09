@@ -50,7 +50,10 @@ target_compile_features(${name}
       cxx_constexpr
 )
 
-
+#if(UNIX AND NOT APPLE)
+message(STATUS "oyoctogl.CMakeLists.txt : adding stdc++ for UNIX AND NOT APPLE")
+target_link_libraries( ${name} PUBLIC stdc++ )
+#endif()
 
 install(TARGETS ${name}  DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
